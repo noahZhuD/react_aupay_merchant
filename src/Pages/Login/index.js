@@ -12,7 +12,6 @@ export default class Login extends Component {
     }
   }
   usernameVal = (rule, value, callback) => {
-    console.log(value)
     const regUser = /^[a-zA-Z0-9_]{1,}$/g
     if (!regUser.test(value) || !value) {
       return callback('账号只能存在数字字母下划线组合')
@@ -29,7 +28,17 @@ export default class Login extends Component {
       console.log(res, 'rrr')
     })
   };
+  saveUser = (e) => {
+    let value = Object.assign({}, this.state.form, { merchantId: e.target.value })
+    this.setState({
+      form: value
+    })
+  }
+  getUser = () => {
+    console.log(this.state.form.merchantId)
+  }
   render() {
+    // const { } = this.state
     return (
       <div className="login_bg">
         <div className="login_wrap">
@@ -43,7 +52,7 @@ export default class Login extends Component {
               name="merchantId"
               rules={[{ validator: this.usernameVal }]}
             >
-              <Input placeholder='账号' />
+              <Input onChange={ this.saveUser } placeholder='账号' />
             </Form.Item>
 
             <Form.Item
@@ -51,6 +60,11 @@ export default class Login extends Component {
               rules={[{ required: true, message: '请正确输入密码' }]}
             >
               <Input.Password placeholder='密码' />
+            </Form.Item>
+            <Form.Item>
+              <Button onClick={ this.getUser } className='login_btn' type="primary">
+                获取账号信息
+              </Button>
             </Form.Item>
             <Form.Item>
               <Button className='login_btn' type="primary" htmlType="submit">
