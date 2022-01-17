@@ -1,14 +1,15 @@
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { Component } from 'react'
-import { verifyCount } from '@/Utils/verify.js'
 import './index.scss'
 import { LoginApi } from '@/Api/login.js'
 import { encode64 } from '@/Utils/encode'
+import GetUsername from './components/getUsername';
 export default class Login extends Component {
   constructor() {
     super()
     this.state = {
-      form: { merchantId: '', password: '' }
+      form: { merchantId: '', password: '' },
+      login_h1: 'auPay商户中心'
     }
   }
   usernameVal = (rule, value, callback) => {
@@ -34,15 +35,18 @@ export default class Login extends Component {
       form: value
     })
   }
-  getUser = () => {
-    console.log(this.state.form.merchantId)
+  updateH1 = () => {
+    this.setState({
+      login_h1: '哈哈哈 我点击了'
+    })
   }
+  
   render() {
     // const { } = this.state
     return (
       <div className="login_bg">
         <div className="login_wrap">
-          <h1>auPay商户中心</h1>
+          <h1 onClick={ this.updateH1 }>{ this.state.login_h1 }</h1>
           <Form
             name="login"
             onFinish={this.onFinish}
@@ -62,9 +66,7 @@ export default class Login extends Component {
               <Input.Password placeholder='密码' />
             </Form.Item>
             <Form.Item>
-              <Button onClick={ this.getUser } className='login_btn' type="primary">
-                获取账号信息
-              </Button>
+              <GetUsername username={ this.state.form.merchantId }></GetUsername>
             </Form.Item>
             <Form.Item>
               <Button className='login_btn' type="primary" htmlType="submit">
