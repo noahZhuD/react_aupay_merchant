@@ -1,10 +1,12 @@
 import { Form, Input, Button } from 'antd';
 import { Component } from 'react'
+import { withRouter }  from 'react-router-dom'
 import './index.scss'
 import { LoginApi } from '@/Api/login.js'
 import { encode64 } from '@/Utils/encode'
 import GetUsername from './components/getUsername';
-export default class Login extends Component {
+import { setToken } from '@/Utils/token.js'
+class Login extends Component {
   constructor() {
     super()
     this.state = {
@@ -15,9 +17,9 @@ export default class Login extends Component {
   usernameVal = (rule, value, callback) => {
     const regUser = /^[a-zA-Z0-9_]{1,}$/g
     if (!regUser.test(value) || !value) {
-      return callback('账号只能存在数字字母下划线组合')
+      return Promise.reject('账号只能存在数字字母下划线组合')
     } else {
-      return callback()
+      return Promise.resolve()
     }
   }
   onFinish = (values) => {
@@ -26,7 +28,10 @@ export default class Login extends Component {
     sendData.password = encode64(sendData.password)
     sendData.code = null
     LoginApi(sendData).then(res => {
-      console.log(res, 'rrr')
+      if (res.data && res.data.code === 200) {
+        setToken(res.data.data)
+        this.props.history.push('/index/home')
+      }
     })
   };
   saveUser = (e) => {
@@ -80,3 +85,4 @@ export default class Login extends Component {
     )
   }
 }
+export default withRouter(Login)

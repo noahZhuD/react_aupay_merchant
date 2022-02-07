@@ -1,40 +1,17 @@
 import { Component } from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import routers from '@/Router'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Login from '@/Pages/Login'
+import Error from '@/Pages/404'
+import PrivateRouter from '@/Router/privateRouter'
+
 export default class Home extends Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          {
-            routers.map((router, index) => {
-              return (
-                <Route
-                  exact={ router.exact }
-                  key={ index }
-                  path={ router.path }
-                  render={ props => {
-                    return (
-                      <div>
-                        <router.component { ...props }>
-                          {
-                            router.children?.map((item, itemI) => {
-                              return (
-                                <Route key={ itemI } exact={ item.exact } path={ item.path } component={ item.component } />
-                              )
-                            })
-                          }
-                          {/* 重定向的处理 */}
-                          {
-                            router.redirect ? <Redirect from={ router.redirect[0] } to={ router.redirect[1] }></Redirect> : null
-                          }
-                        </router.component>
-                      </div>
-                    )
-                  } } />
-              )
-            })
-          }
+          <Route exact path="/login" component={ Login }></Route>
+          <PrivateRouter />
+          <Route path="*" component={ Error }></Route>
         </Switch>
       </BrowserRouter>
     )

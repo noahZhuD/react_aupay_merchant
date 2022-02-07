@@ -15,8 +15,8 @@ export default class Layout extends Component {
             </ul>
           </div>
         </div>
-        <Link to='/layout/home'>首页</Link>
-        <Link to='/layout/about'>关于我们</Link>
+        <Link to='/index/home'>首页</Link>
+        <Link to='/index/about'>关于我们</Link>
         { this.props.children }
       </div>
     )

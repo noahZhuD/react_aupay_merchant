@@ -1,4 +1,3 @@
-import Login from '@/Pages/Login'
 import Layout from '@/Pages/Layout'
 import Home from '@/Pages/Home'
 import About from '@/Pages/About'
@@ -6,30 +5,25 @@ import Error from '@/Pages/404'
 
 const routers = [
   {
-    path: '/',
-    exact: true,
-    component: Login,
-  },
-  {
-    path: '/layout',
+    path: '/index',
     component: Layout,
-    redirect: ['/layout', '/layout/home'],
+    redirect: ['/index', '/index/home'],
     children: [
       {
-        path: '/layout/home',
+        path: '/index/home',
         exact: true,
         component: Home,
       },
       {
-        path: '/layout/about',
+        path: '/index/about',
         exact: true,
         component: About,
       }
     ]
   },
-  {
-    path: '*',
-    component: Error
-  }
+  // {
+  //   path: '*',
+  //   component: Error
+  // }
 ]
 export default routers
