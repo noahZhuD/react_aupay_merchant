@@ -1,31 +1,46 @@
 import { Menu } from 'antd';
 import { Component } from 'react'
+import routers from '@/Router/index.js'
+import { Link } from 'react-router-dom'
 
-export default class Sider extends Component {
+export default class SiderMenu extends Component {
   componentDidMount() {
     console.log(this.props)
   }
   handleClick = e => {
     console.log('click ', e);
   };
+  // 无子级
+  menuItem = (item) => {
+    return <Menu.Item key={ item.path }><Link to={ item.path }>{ item.meta.title }</Link></Menu.Item>
+  }
+  // 有子级
+  menuSubItem = (item) => {
+    return (
+      <Menu.SubMenu key={ item.path } title={ item.meta.title }>
+        {
+          item.children.map(item2 => {
+            return item2.children && item2.children.length > 0 ? this.menuSubItem(item2) : this.menuItem(item2)
+          })
+        }
+      </Menu.SubMenu>
+    )
+    
+  }
   render() {
     return (
       <Menu
         onClick={this.handleClick}
-        style={{ width: 256 }}
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         mode="inline"
+        them="dark"
       >
-        <Menu.Item key="1">Option 1</Menu.Item>
-        <Menu.ItemGroup key="g1" title="Item 1">
-          <Menu.Item key="1">Option 1</Menu.Item>
-          <Menu.Item key="2">Option 2</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup key="g2" title="Item 2">
-          <Menu.Item key="3">Option 3</Menu.Item>
-          <Menu.Item key="4">Option 4</Menu.Item>
-        </Menu.ItemGroup>
+        {
+          routers.map(item => {
+            return item.children && item.children.length > 0 ? this.menuSubItem(item) : this.menuItem(item) 
+          })
+        }
       </Menu>
     );
   }

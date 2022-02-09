@@ -2,10 +2,6 @@ import Layout from '@/Pages/Layout'
 
 const routers = [
   {
-    path: '/',
-    redirect: ['/property', '/property/overview'],
-  },
-  {
     path: '/index/property',
     icon: 'aaaa',
     meta: { title: '资产概览' },
