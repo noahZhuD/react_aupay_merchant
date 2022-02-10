@@ -4,10 +4,22 @@ import routers from '@/Router/index.js'
 import { Link } from 'react-router-dom'
 
 export default class SiderMenu extends Component {
-  componentDidMount() {
-    console.log(this.props)
+  constructor(props) {
+    super(props)
+    this.state = {
+      defaultOpenKeys: [],
+      defaultSelectedKeys: []
+    }
+  }
+  componentWillMoun() {
+    console.log(this.props, 123)
+    this.setState({
+      defaultOpenKeys: ['/index/property'],
+      defaultSelectedKeys: ['/index/property/overview']
+    })
   }
   handleClick = e => {
+    
     console.log('click ', e);
   };
   // 无子级
@@ -31,8 +43,8 @@ export default class SiderMenu extends Component {
     return (
       <Menu
         onClick={this.handleClick}
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
+        defaultSelectedKeys={this.defaultSelectedKeys}
+        defaultOpenKeys={this.defaultOpenKeys}
         mode="inline"
         them="dark"
       >

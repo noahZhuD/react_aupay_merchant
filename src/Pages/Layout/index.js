@@ -1,7 +1,7 @@
 import { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { Layout, Breadcrumb } from 'antd';
 import SiderMenu from './Sider'
+import MainRouter from './MainRouter'
 import './index.scss'
 const { Header, Content, Sider } = Layout;
 export default class LayoutWrap extends Component {
@@ -29,19 +29,11 @@ export default class LayoutWrap extends Component {
                 minHeight: 280,
               }}
             >
-              我是内容啦
+              <MainRouter />
             </Content>
           </Layout>
         </Layout>
       </Layout>
-      // <div>
-      //   <div className='layout_w'>
-      //     <Sider />
-      //   </div>
-      //   <Link to='/index/home'>首页</Link>
-      //   <Link to='/index/about'>关于我们</Link>
-      //   { this.props.children }
-      // </div>
     )
   }
 }
