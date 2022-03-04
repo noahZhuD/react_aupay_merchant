@@ -8,22 +8,28 @@ class SiderMenu extends Component {
     super(props)
     this.state = {
       defaultOpenKeys: [],
-      defaultSelectedKeys: []
+      defaultSelectedKeys: [],
+      collapsed: false
     }
   }
   componentWillMount() {
-    console.log(this.props.location.pathname, 123)
     const pathName = this.props.location.pathname
+    const openName = pathName.split('/').splice(0, pathName.split('/').length -1).join('/')
     this.setState({
-      defaultOpenKeys: ['/index/property'],
+      defaultOpenKeys: openName,
       defaultSelectedKeys: [pathName]
     })
+  }
+  componentDidUpdate(props) {
+    console.log(props, 'ppp')
+    // this.setState({
+    //   collapsed: props.collapsed
+    // })
   }
   handleClick = e => {
     this.setState({
       defaultSelectedKeys: [e.key]
     })
-    console.log('click ', e);
   };
   clickMenuTit = e => {
     this.setState({
@@ -53,6 +59,7 @@ class SiderMenu extends Component {
         onClick={this.handleClick}
         selectedKeys={this.state.defaultSelectedKeys}
         openKeys={this.state.defaultOpenKeys}
+        inlineCollapsed={this.props.collapsed}
         mode="inline"
         them="dark"
       >
