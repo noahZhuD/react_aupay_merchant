@@ -59,7 +59,6 @@ class SiderMenu extends Component {
         onClick={this.handleClick}
         selectedKeys={this.state.defaultSelectedKeys}
         openKeys={this.state.defaultOpenKeys}
-        inlineCollapsed={this.props.collapsed}
         mode="inline"
         them="dark"
       >

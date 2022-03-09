@@ -1,13 +1,12 @@
 import { Component } from 'react'
 
-class Overview extends Component {
+export default class Deposit extends Component {
   constructor(props) {
     super(props)
   }
   render() {
     return (
-      <div>资产总览</div>
+      <div>充值记录</div>
     )
   }
 }
-export default Overview
