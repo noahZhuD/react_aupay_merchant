@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { Component } from 'react'
 import { withRouter }  from 'react-router-dom'
 import './index.scss'
@@ -31,6 +31,8 @@ class Login extends Component {
       if (res.data && res.data.code === 200) {
         setToken(res.data.data)
         this.props.history.push('/index/home')
+      } else {
+        message.error(res.data.message || '登录失败')
       }
     })
   };

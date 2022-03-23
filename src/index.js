@@ -4,6 +4,9 @@ import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Stroe from '@/Redux/store'
+
+console.log(Stroe.getState())
 
 ReactDOM.render(
   // <React.StrictMode>

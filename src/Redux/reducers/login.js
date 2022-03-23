@@ -1,15 +1,10 @@
-const state = {
-  userInfo: {}
+const loginState = {
+  userInfo: {},
+  name: 'noah'
 }
 
-const LoginReducer = (state = state, action) => {
-  switch(action.type) {
-    case 'LOGIN': {
-      console.log(state, '调用登录reducer')
-      return { ...state }
-      break
-    }
-  }
+const LoginReducer = (state = loginState, action) => {
+  return state
 }
 
 export default LoginReducer
