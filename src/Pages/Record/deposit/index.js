@@ -1,9 +1,18 @@
 import { Component } from 'react'
 import { Table } from 'antd'
+import { connect } from 'react-redux'
 
-export default class Deposit extends Component {
+class Deposit extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      title: '我是标题',
+      name: ''
+    }
+  }
+  componentDidMount() {
+    console.log(this.props.loginReducer, 'uuuuu')
+    this.setState({ name: this.props.loginReducer.name })
   }
   render() {
     const columns =  [
@@ -17,11 +26,19 @@ export default class Deposit extends Component {
     const dataSource = []
     return (
       <div>
-        <h2>充值记录</h2>
+        <h2>充值记录{ this.state.name }</h2>
         <div className="commit_table">
-          <Table dataSource={dataSource} columns={columns} />;
+          <Table dataSource={dataSource} columns={columns} />
         </div>
       </div>
     )
   }
 }
+const mapStateToProps = (state) => {
+  return { loginReducer: state.LoginReducer }
+}
+// const mapDispatchToProps = () => {}
+export default connect(
+  mapStateToProps,
+  // mapDispatchToProps
+)(Deposit)

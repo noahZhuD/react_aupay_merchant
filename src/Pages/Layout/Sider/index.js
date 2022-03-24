@@ -21,7 +21,7 @@ class SiderMenu extends Component {
     })
   }
   componentDidUpdate(props) {
-    console.log(props, 'ppp')
+    // console.log(props, 'ppp')
     // this.setState({
     //   collapsed: props.collapsed
     // })
